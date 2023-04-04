@@ -1,0 +1,99 @@
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <title>Bootstrap Example</title>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="container">-->
+<!--    <h1>ITEM🎁</h1>-->
+<!--    <h2>Member</h2>-->
+<!--    <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <td>id</td>-->
+<!--            <td>name</td>-->
+<!--            <td>price</td>-->
+<!--            <td>imgname</td>-->
+<!--            <td>rdate</td>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="item: ${itemList}">-->
+
+<!--            <td th:text="${item.getId()}"></td>-->
+<!--            <td th:text="${item.getName()}"></td>-->
+<!--            <td th:text="${item.getPrice()}"></td>-->
+<!--            <td th:text="${item.getImgname()}"></td>-->
+<!--            <td th:text="${item.getRdate()}"></td>-->
+<!--        </tr>-->
+
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+<style>
+    .item_img{
+        width:80px;
+    }
+
+</style>
+<div class="container">
+    <div class="col-sm-10">
+        <h2>Cart List</h2>
+        <p>Cart Information List</p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>img</th>
+                <th>id</th>
+                <th>item_name</th>
+                <th>cnt</th>
+                <th>rdate</th>
+
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i:${items.getList()}">
+                <td>
+                    <a href="">
+                        <img th:src="'/img/'+${i.item_imgname}" class="item_img">
+                    </a>
+                </td>
+                <td th:text="${i.id}"></td>
+                <td th:text="${i.item_name}"></td>
+                <td th:text="${i.item_price}"></td>
+                <td th:text="${i.cnt}"></td>
+                <td th:text="${i.rdate}"></td>
+<!--                <td th:text="${cart.item_price}"></td>-->
+
+
+            </tr>
+
+            </tbody>
+        </table>
+        <ul class="pagination">
+            <li th:classappend="${items.getPrePage() == 0} ? 'disabled'">
+                <a th:href="@{/cart(pageNum=${items.getPrePage()}, id=${session.logincust.id})}">Previous</a>
+            </li>
+            <li th:each="page: ${#numbers.sequence(items.getNavigateFirstPage(), items.getNavigateLastPage())}" th:classappend="${page == items.getPageNum()} ? 'active'">
+                <a th:text="${page}" th:href="@{/cart(pageNum=${page}, id=${session.logincust.id})}"></a>
+            </li>
+            <li th:classappend="${items.getNextPage() == 0} ? 'disabled'">
+                <a th:href="@{/cart(pageNum=${items.getNextPage()}, id=${session.logincust.id})}">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
