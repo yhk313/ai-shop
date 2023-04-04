@@ -24,7 +24,7 @@
     </select>
 
     <insert id="insert" parameterType="CartsDTO">
-        INSERT INTO cart VALUES (NULL, #{cust_id}, #{item_id}, #{cnt}, NOW())
+        INSERT INTO cart VALUES (NULL, #{cust_id}, #{item_id}, #{cnt}, SYSDATE())
     </insert>
     <update id="update" parameterType="CartsDTO">
         UPDATE cart SET item_id =#{item_id}, cnt=#{cnt} WHERE id = #{id}

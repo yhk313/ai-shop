@@ -1,25 +1,17 @@
 
 <script>
         $(document).ready(function(){
-            $('#update_btn').click(function(){
-                $('#update_form').attr(
-                    {   'enctype':'multipart/form-data',
-                        'action':'[[@{/item/updateimpl}]]',
+            $('#addcart_btn').click(function(){
+                $('#addcart_form').attr(
+                    {
+                        'action':'[[@{/cart/addcartimpl}]]',
                         'method':'post'
                     }
                 );
-                alert('수정되었습니다!')
-                $('#update_form').submit();
+                alert('장바구니에 추가되었습니다!')
+                $('#addcart_form').submit();
             });
 
-        $('#delete_btn').click(function(){
-            id = $('#id').val();
-            var c = confirm('삭제하시겠습니까?');
-            if(c == true){
-            location.href ='/item/deleteimpl?id='+id;
-            }
-
-        });
         });
     </script>
 <style>

@@ -1,48 +1,17 @@
+<Script>
+    function delcart(did) {
+            var c = confirm("삭제하시겠습니까?");
+            if(c == true) {
+            location.href = '/cart/deleteimpl?id='+did+'&cid=[[${session.logincust.id}]]';
 
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <title>Bootstrap Example</title>-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
-<!--</head>-->
-<!--<body>-->
+    }
+    }
+</Script>
 
-<!--<div class="container">-->
-<!--    <h1>ITEM🎁</h1>-->
-<!--    <h2>Member</h2>-->
-<!--    <table class="table">-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <td>id</td>-->
-<!--            <td>name</td>-->
-<!--            <td>price</td>-->
-<!--            <td>imgname</td>-->
-<!--            <td>rdate</td>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="item: ${itemList}">-->
 
-<!--            <td th:text="${item.getId()}"></td>-->
-<!--            <td th:text="${item.getName()}"></td>-->
-<!--            <td th:text="${item.getPrice()}"></td>-->
-<!--            <td th:text="${item.getImgname()}"></td>-->
-<!--            <td th:text="${item.getRdate()}"></td>-->
-<!--        </tr>-->
-
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
 <style>
     .item_img{
-        width:80px;
+        width:50px;
     }
 
 </style>
@@ -50,14 +19,29 @@
     <div class="col-sm-10">
         <h2>Cart List</h2>
         <p>Cart Information List</p>
-        <table class="table table-striped">
+
+        <div th:if="${#lists.size(mycarts) != 0}">
+            <h3 th:text ="|합계: ${#aggregates.sum(mycarts.![item_price * cnt])}|"></h3>
+        </div>
+        <div th:if="${#lists.size(mycarts) == 0}">
+            <h3>합계: 0</h3>
+        </div>
+
+
+
+
+
+        <table class="table table-striped col-sm-10"  >
             <thead>
             <tr>
-                <th>img</th>
-                <th>id</th>
-                <th>item_name</th>
-                <th>cnt</th>
-                <th>rdate</th>
+                <th>IMG</th>
+                <th>ID</th>
+                <th>ITEM_NAME</th>
+                <th>PRICE</th>
+                <th>CNT</th>
+                <th>TOTAL</th>
+                <th>RDATE</th>
+                <th>DELETE</th>
 
 
 
@@ -75,8 +59,13 @@
                 <td th:text="${i.item_name}"></td>
                 <td th:text="${i.item_price}"></td>
                 <td th:text="${i.cnt}"></td>
-                <td th:text="${i.rdate}"></td>
-<!--                <td th:text="${cart.item_price}"></td>-->
+                <td th:text="${i.item_price} * ${i.cnt}"></td>
+                <td th:text="${#dates.format(i.rdate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td>
+<!--                    <a th:href="@{/cart/delete(id=${i.id})}" class="btn btn-info" role="button">DELETE</a>-->
+                    <button type="button" class="btn btn-danger"
+                    th:onclick="delcart([[${i.id}]]);">DELETE</button>
+                </td>
 
 
             </tr>
