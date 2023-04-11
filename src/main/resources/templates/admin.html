@@ -1,0 +1,92 @@
+
+<style>
+#all {
+	width: 400px;
+	height: 200px;
+	overflow: auto;
+	border: 2px solid red;
+}
+
+#me {
+	width: 400px;
+	height: 200px;
+	overflow: auto;
+	border: 2px solid blue;
+}
+
+#to {
+	width: 400px;
+	height: 200px;
+	overflow: auto;
+	border: 2px solid green;
+}
+</style>
+
+<script>
+var stompClient = null;
+var id = '[[${session.logincust.id}]]';
+// 서버소켓에 연결
+function connect() {//접속시도
+	var socket = new SockJS('http://10.10.10.172/ws');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function(frame) {//3가지 connect 받을 준비.
+		setConnected(true);//커넥트 이름 바꾸기
+		console.log('Connected: ' + frame);
+
+
+		stompClient.subscribe('/send/to/'+id, function(msg) {
+			$("#to").prepend(
+					"<h4>" + JSON.parse(msg.body).sendid +":"+
+					JSON.parse(msg.body).content1
+							+ "</h4>");
+		});
+	});
+}
+
+// 서버소켓에 연결끊기
+
+
+// connect&disconnect버턴 활성화/비활성화
+function setConnected(connected) {
+	if (connected) {
+		$("#status").text("Connected");
+	} else {
+		$("#status").text("Disconnected");
+	}
+
+}
+
+// 서버에 메세지 요청 메서드
+
+
+function sendTo() {
+    var receiveid = 'admin';
+	var msg = JSON.stringify({
+		'sendid' : id,
+		'receiveid' : receiveid,
+		'content1' : $('#totext').val()
+	});
+	stompClient.send('/receiveto', {}, msg);
+}
+$(document).ready(function() {
+	connect();
+	$("#sendto").click(function() {
+		sendTo();
+	});
+});
+</script>
+
+
+<div class="container">
+    <div class="col-sm-5">
+        <h1>Admin1:1</h1>
+        <H1 th:text="${session.logincust.id}">ID</H1>
+        <H1 id="status">Status</H1>
+
+
+        <input type="text" id="totext"><button id="sendto">Send</button>
+        <div id="to"></div>
+
+    </div>
+</div>

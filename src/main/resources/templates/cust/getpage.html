@@ -1,8 +1,30 @@
-
+<script>
+$(document).ready(function(){
+    $('#item_search_btn').click(function(){
+        $('#item_search_form').attr(
+            {
+                'action':'[[@{/cust/searchimpl}]]',
+                'method':'post'
+            }
+        );
+        $('#item_search_form').submit();
+    });
+});
+</script>
 <div class="container">
     <div class="col-sm-10">
     <h2>Cust List</h2>
         <p>Cust Information List</p>
+        <form id="item_search_form">
+            <div class="input-group col-sm-3">
+                <input type="text" name="txt" class="form-control" placeholder="Search">
+                <div class="input-group-btn">
+                    <button id="item_search_btn" class="btn btn-default">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
     <table class="table table-striped ">
         <thead>
         <tr>

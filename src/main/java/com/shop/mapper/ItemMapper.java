@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ItemMapper extends MyMapper<Integer, ItemDTO> {
-    public List<ItemDTO> search(String txt) throws Exception;
+    public Page<ItemDTO> search(String txt) throws Exception;
     Page<ItemDTO> getPage() throws Exception;// 페이징처리 외부라이브러리 이용
 }

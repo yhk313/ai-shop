@@ -1,0 +1,285 @@
+<style>
+    #map{
+    width:500px;
+    height:500px;
+    border:1px solid red;
+    }
+
+
+
+</style>
+<script>
+var map;
+
+    function display(){//최초한번
+        var mapContainer = document.getElementById('map');
+        var mapOption = {
+            center: new kakao.maps.LatLng(35.1658125,129.1350625),
+            level: 3
+        };
+
+
+        map = new kakao.maps.Map(mapContainer, mapOption);
+        var mapTypeControl = new kakao.maps.MapTypeControl();
+
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+        var zoomControl = new kakao.maps.ZoomControl();
+        map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    }
+    function markers(loc){
+        var positions = [];
+        if(loc == 's'){
+            positions = [
+                {
+                    title: '국밥',
+                    latlng: new kakao.maps.LatLng(37.5537401,126.9940781),
+                    target: 'http://www.naver.com',
+                    imgname: 'gooq.jpg'
+                },
+                {
+                    title: '밀면',
+                    latlng: new kakao.maps.LatLng(37.5517401,126.9910781),
+                    target: 'http://www.daum.net',
+                    imgname: 'mil.jpg'
+                },
+                {
+                    title: '비빔당면',
+                    latlng: new kakao.maps.LatLng(37.5527401,126.9970781),
+                    target: 'http://www.goole.com',
+                    imgname: 'bi.jpg'
+                },
+                {
+                    title: '회',
+                    latlng: new kakao.maps.LatLng(37.5507401,126.9900781),
+                    target: 'http://www.nate.com',
+                    imgname: 'fish.jpg'
+                }
+            ];
+
+        }
+
+        else if(loc == 'b'){
+            positions = [
+                {
+                    title: '울릉도 소주방',
+                    latlng: new kakao.maps.LatLng(35.1233984,129.0856448),
+                    target: 'b001',
+                    imgname: '울릉도소주방.jpg'
+                },
+                {
+                    title: '개금밀면',
+                    latlng: new kakao.maps.LatLng(35.1213984,129.0816448),
+                    target: 'b002',
+                    imgname: 'mil.jpg'
+                },
+                {
+                    title: '국제시장',
+                    latlng: new kakao.maps.LatLng(35.1253984,129.0856448),
+                    target: 'b003',
+                    imgname: 'bi.jpg'
+                },
+                {
+                    title: '부엉이횟집',
+                    latlng: new kakao.maps.LatLng(35.1283984,129.0886448),
+                    target: 'b004',
+                    imgname: 'fish.jpg'
+                }
+            ];
+
+        }else if(loc == 'j'){
+            positions = [
+                {
+                    title: '국밥',
+                    latlng: new kakao.maps.LatLng(33.5189183,126.6182571),
+                    target: 'http://www.naver.com',
+                    imgname: 'gooq.jpg'
+                },
+                {
+                    title: '밀면',
+                    latlng: new kakao.maps.LatLng(33.5119183,126.6112571),
+                    target: 'http://www.daum.net',
+                    imgname: 'mil.jpg'
+                },
+                {
+                    title: '비빔당면',
+                    latlng: new kakao.maps.LatLng(33.5129183,126.6122571),
+                    target: 'http://www.goole.com',
+                    imgname: 'bi.jpg'
+                },
+                {
+                    title: '회',
+                    latlng: new kakao.maps.LatLng(33.5169183,126.6162571),
+                    target: 'http://www.nate.com',
+                    imgname: 'fish.jpg'
+                }
+            ];
+
+        } else if(loc == 'k'){
+            positions = [
+                {
+                    title: '온센',
+                    latlng: new kakao.maps.LatLng(35.8366915, 129.2083904),
+                    target: 'http://www.naver.com',
+                    imgname: 'on.jpg'
+                },
+                {
+                    title: '경주원조콩국',
+                    latlng: new kakao.maps.LatLng(35.8334295, 129.2147573),
+                    target: 'http://www.daum.net',
+                    imgname: 'kong.jpg'
+                },
+                {
+                    title: '경주황남비빔밥',
+                    latlng: new kakao.maps.LatLng(35.8340706, 129.21031),
+                    target: 'http://www.goole.com',
+                    imgname: 'hwang.jpg'
+                },
+                {
+                    title: '황남옥수수',
+                    latlng: new kakao.maps.LatLng(35.8380188, 129.2096583),
+                    target: 'http://www.nate.com',
+                    imgname: 'ok.jpg'
+                }
+            ];
+
+        }
+
+        var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+        for (var i = 0; i < positions.length; i ++) {
+
+            // 마커 이미지의 이미지 크기 입니다
+            var imageSize = new kakao.maps.Size(24, 35);
+
+                // 마커 이미지를 생성합니다
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                map: map, // 마커를 표시할 지도
+                position: positions[i].latlng, // 마커를 표시할 위치
+                title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                image : markerImage // 마커 이미지
+            });
+
+        //infowindow
+        var iwContent = '<h2 style="font-size:15px;">'+positions[i].title+'</h2>';
+        iwContent += '<img src="/img/'+positions[i].imgname+'" style="width:150px;">'
+
+
+
+        var infowindow = new kakao.maps.InfoWindow({
+            position : positions[i].latlng,
+            content : iwContent
+        });
+
+        kakao.maps.event.addListener(marker, 'mouseover', mouseoverListener(marker, infowindow));
+		kakao.maps.event.addListener(marker, 'mouseout', mouseoutListener(marker, infowindow));
+		kakao.maps.event.addListener(marker, 'click', mouseclickListener(positions[i].target));
+
+		function mouseoverListener(marker, infowindow) {
+		    return function(){
+			    infowindow.open(map, marker);
+            };
+	    }
+	    function mouseoutListener(marker, infowindow) {
+		    return function(){
+			    infowindow.close();
+		    };
+	    }
+	    function mouseclickListener(target) {
+	  	    return function(){
+	  		    location.href = '/shopdetail?id='+target;
+	  	    };
+	    }
+    }; //지역에따른마커표시
+
+    }
+    function displaymarker(lat,lng, loc){
+        var markerPosition  = new kakao.maps.LatLng(lat,lng);
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+        marker.setMap(map);
+        var iwContent;
+        var target;
+        if(loc=='s'){
+            target = 'http://www.seoul.go.kr';
+            iwContent = '<div style="padding:5px;">Seoul<br><img src= "/img/emart.jpg" style="width:100px;"</div>';
+        }else if(loc=='b'){
+            target = 'http://www.busan.go.kr';
+            iwContent = '<div style="padding:5px;">Busan<br><img src= "/img/우유.jpg" style="width:100px;"</div>';
+        }else if(loc=='j'){
+            target = 'http://www.jeju.go.kr';
+            iwContent = '<div style="padding:5px;">Jeju<br><img src= "/img/초콜릿.jpg" style="width:100px;"</div>';
+        }else if(loc=='k'){
+            target = 'http://www.jeju.go.kr';
+            iwContent = '<div style="padding:5px;">Kyeongju<br><img src= "/img/초콜릿.jpg" style="width:100px;"</div>';
+        }
+
+        iwPosition = new kakao.maps.LatLng(lat,lng); //인포윈도우 표시 위치입니다
+
+        // 인포윈도우를 생성합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            position : iwPosition,
+            content : iwContent
+        });
+
+        kakao.maps.event.addListener(marker, 'mouseover', mouseoverListener(marker, infowindow));
+		kakao.maps.event.addListener(marker, 'mouseout', mouseoutListener(marker, infowindow));
+		kakao.maps.event.addListener(marker, 'click', mouseclickListener(target));
+		function mouseoverListener(marker, infowindow) {
+		    return function(){
+			    infowindow.open(map, marker);
+            };
+	    }
+	    function mouseoutListener(marker, infowindow) {
+		    return function(){
+			    infowindow.close();
+		    };
+	    }
+	    function mouseclickListener(target) {
+	  	    return function(){
+	  		    location.href = target;
+	  	    };
+	    }
+	    markers(loc);//센터 중심으로 주변 정보 뿌림
+
+    };
+
+
+    function go(lat,lng,loc){
+        var moveLatLon = new kakao.maps.LatLng(lat,lng);
+        map.panTo(moveLatLon);
+        displaymarker(lat,lng,loc);
+
+    };//경로 이동
+
+    $(document).ready(function(){
+        display();
+        $('#bt1').click(function(){
+            go(37.5527401,126.9930781,'s');
+        });
+        $('#bt2').click(function(){
+            go(35.1223984,129.0896448,'b');
+        });
+        $('#bt3').click(function(){
+            go(33.5199183,126.6142571,'j');
+        });
+        $('#bt4').click(function(){
+            go(35.8266161, 129.235988,'k');
+        });
+	});
+
+
+</script>
+<div class="container">
+    <div class="col-sm-5">
+        <h2>Map test1</h2>
+        <button id="bt1">Seoul</button>
+        <button id="bt2">Busan</button>
+        <button id="bt3">jeju</button>
+        <button id="bt4">Gyeongju</button>
+        <div id="map"></div>
+
+    </div>
+</div>

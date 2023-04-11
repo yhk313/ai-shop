@@ -1,23 +1,22 @@
-package com.shop.item;
+package com.shop.shop;
 
-import com.shop.dto.ItemDTO;
-import com.shop.service.ItemService;
+import com.shop.dto.MallDTO;
+import com.shop.dto.ShopDTO;
+import com.shop.service.MallService;
+import com.shop.service.ShopService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 @SpringBootTest
-class SearchTests {
+class SelectTests {
 	@Autowired
-	ItemService service;
+	ShopService service;
 	@Test
 	void contextLoads() {
-		List<ItemDTO> list = null;
+		ShopDTO obj = null;
 		try {
-			list = service.search(1,"바");
-			for(ItemDTO obj:list)
+			obj = service.get("s001");
 			System.out.println(obj);
 		} catch (Exception e) {
 			e.printStackTrace();

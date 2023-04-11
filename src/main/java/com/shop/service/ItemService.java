@@ -43,7 +43,8 @@ public class ItemService implements MyService<Integer, ItemDTO> {
         return itemMapper.selectall();
     }
 
-    public List<ItemDTO> search(String txt) throws Exception{
+    public Page<ItemDTO> search(int pageNo, String txt) throws Exception{
+        PageHelper.startPage(pageNo, 3);// 10개만 들어옴
         return itemMapper.search(txt);
     }
     public Page<ItemDTO> getPage(int pageNo) throws Exception {//페이징처리

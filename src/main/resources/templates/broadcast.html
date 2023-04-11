@@ -1,0 +1,87 @@
+
+<style>
+#all {
+	width: 400px;
+	height: 200px;
+	overflow: auto;
+	border: 2px solid red;
+}
+
+#me {
+	width: 400px;
+	height: 200px;
+	overflow: auto;
+	border: 2px solid blue;
+}
+
+#to {
+	width: 400px;
+	height: 200px;
+	overflow: auto;
+	border: 2px solid green;
+}
+</style>
+
+<script>
+var stompClient = null;
+var id = '[[${session.logincust.id}]]';
+// 서버소켓에 연결
+function connect() {//접속시도
+	var socket = new SockJS('http://10.10.10.172/ws');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function(frame) {//3가지 connect 받을 준비.
+		setConnected(true);//커넥트 이름 바꾸기
+		console.log('Connected: ' + frame);
+		stompClient.subscribe('/send', function(msg) {
+			$("#all").prepend(
+					"<h4>" + JSON.parse(msg.body).sendid +":"+
+					JSON.parse(msg.body).content1
+							+ "</h4>");
+		});
+
+
+	});
+}
+
+function setConnected(state){
+    if(state == true){
+        $('#status').text('Connected');
+    }else{
+        $('#status').text('Disconnected');
+    }
+
+}
+
+// 서버에 메세지 요청 메서드
+function sendAll() {
+	var msg = JSON.stringify({
+		'sendid' : id,
+		'content1' : $("#alltext").val()
+	});
+	stompClient.send("/receiveall", {}, msg);
+}
+
+$(document).ready(function() {
+    connect();//바로 connect
+	$("#sendall").click(function() {
+		sendAll();
+	});
+
+});
+</script>
+
+
+<div class="container">
+    <div class="col-sm-5">
+        <h1>BroadCast</h1>
+        <H1 th:text="${session.logincust.id}">ID</H1>
+        <H1 id="status">Status</H1>
+
+
+        <h3>All</h3>
+        <input type="text" id="alltext"><button id="sendall">Send</button>
+        <div id="all"></div>
+
+    </div>
+</div>

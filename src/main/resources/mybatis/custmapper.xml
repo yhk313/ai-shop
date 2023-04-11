@@ -13,6 +13,9 @@
     <select id="selectall" resultType="custDTO">
         SELECT * FROM cust
     </select>
+    <select id="search" parameterType="String" resultType="custDTO">
+        SELECT * FROM cust WHERE name LIKE CONCAT('%',#{txt},'%')
+    </select>
     <insert id="insert" parameterType="custDTO">
         INSERT INTO cust VALUES (#{id},#{pwd},#{name})
     </insert>
@@ -22,5 +25,7 @@
     <delete id="delete" parameterType="String">
         DELETE FROM cust WHERE id=#{id}
     </delete>
+
+
 
 </mapper>

@@ -1,0 +1,33 @@
+<script>
+        $(document).ready(function(){
+            $('#card_form > button').click(function(){
+                $('#card_form').attr(
+                    {
+                        'enctype':'multipart/form-data',
+                        'action':'[[@{/cardimpl}]]',
+                        'method':'post'
+                    }
+                );
+                $('#card_form').submit();
+            });
+        });
+        </script>
+<div class="container">
+    <div class="col-sm-5">
+        <h2>ItemRegister</h2>
+        <form id="card_form">
+            <div class="form-group">
+<!--                <label for="cd1"><input type="radio" id="cd1" name="cd" value="01" th:checked="${data.cd eq '01'}">-->
+<!--                    <span>카카오뱅크</span></label>-->
+<!--                <label for="cd2"><input type="radio" id="cd2" name="cd" value="02" th:checked="${data.cd eq '02'}">-->
+<!--                    <span>신한은행</span></label>-->
+<!--                <label for="cd3"><input type="radio" id="cd3" name="cd" value="03" th:checked="${data.cd eq '03'}">-->
+<!--                    <span>국민은행</span></label>-->
+                <label for="img">Img:</label>
+                <input type="file" class="form-control" id="img" placeholder="Enter Img" name="img">
+            </div>
+
+            <button class="btn btn-default">REGISTER</button>
+        </form>
+    </div>
+</div>

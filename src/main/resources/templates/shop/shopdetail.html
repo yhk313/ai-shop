@@ -1,0 +1,43 @@
+
+<style>
+    .item_img{
+        width:100px;
+    }
+    .shop_img{
+        width:300px;
+    }
+</style>
+<div class="container">
+    <div class="col-sm-5">
+        <h1></h1>
+        <img class="shop_img" th:src="@{/img/}+${shop.imgname}">
+        <h4 th:text="|가게이름: ${shop.name}|"></h4>
+        <h4 th:text="|주소: ${shop.address}|"></h4>
+        <h4 th:text="|전화번호: ${shop.number}|"></h4>
+        <h4 th:text="|영업시간: ${shop.opentime} ~ ${shop.closetime}|"></h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+
+                <th>IMG</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="s:${slist}">
+                <td>
+
+                    <img class="item_img" th:src="@{/img/}+${s.imgname}">
+
+                </td>
+
+                <td th:text="${s.name}"></td>
+                <td th:text="|${s.price}원|"></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

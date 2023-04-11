@@ -2,6 +2,7 @@ package com.shop.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.shop.dto.CustDTO;
+import com.shop.dto.ItemDTO;
 import com.shop.service.CustService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,5 +101,18 @@ public class CustController {
             throw new RuntimeException(e);
         }
         return "redirect:/cust/getpage";
+    }
+    @RequestMapping("/searchimpl")
+    public String searchimpl(@RequestParam(required = false, defaultValue = "1") int pageNum, Model model, String txt) {
+        try {
+            PageInfo<CustDTO> searchList = new PageInfo<>(custService.search(pageNum, txt), 10);
+            model.addAttribute("users", searchList);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        model.addAttribute("left", dir + "left"); //cust의 left html
+        model.addAttribute("center", dir + "getpage");
+
+        return "main";
     }
 }

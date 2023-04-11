@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=04236951322d71782b7dafcf01baac6a"></script>
+    <script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+    <script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
     <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
@@ -75,8 +78,23 @@
                 <li><a th:href="@{/cust}">Cust</a></li>
                 <li><a th:href="@{/item}">Item</a></li>
                 <li><a th:href="@{/mall}">Mall</a></li>
-                <li th:if="${session.logincust != null}"><a
-                        th:href="@{/cart(id=${session.logincust.id})}">Cart</a>
+                <li><a th:href="@{/map1}">Map1</a></li>
+                <li><a th:href="@{/map2}">Map2</a></li>
+                <li><a th:href="@{/ocr}">OCR</a></li>
+                <li><a th:href="@{/card}">CARD</a></li>
+                <li><a th:href="@{/weather}">WEATHER</a></li>
+
+                <li th:if="${session.logincust != null}">
+                    <a th:href="@{/cart(id=${session.logincust.id})}">Cart</a>
+                <li th:if="${session.logincust != null}">
+                    <a th:href="@{/chat}">Chat</a>
+                <li th:if="${session.logincust != null}">
+                    <a th:href="@{/broadcast}">Broadcast</a>
+                <li th:if="${session.logincust != null}">
+                    <a th:href="@{/admin}">Admin</a>
+                <li th:if="${session.logincust != null}">
+                    <a th:href="@{/chatbot}">Chatbot</a>
+
             </ul>
             <ul th:if="${session.logincust == null}"
                 class="nav navbar-nav navbar-right">

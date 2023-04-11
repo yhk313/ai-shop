@@ -1,0 +1,20 @@
+
+<div class="container">
+    <div class="col-sm-5">
+        <h2>Weather</h2>
+        <form id="weather_form">
+            <div class="form-group">
+                <label for="loc">날씨조회</label>
+                <input type="text" class="form-control" id="loc" placeholder="지역 코드를 입력하세요" name="loc">
+            </div>
+
+            <button class="btn btn-default">조회</button>
+        </form>
+
+        <h1>일기예보</h1>
+        <div>
+            <td th:text="${loc}"></td><br></br>
+            <td th:text="${result}"></td>
+        </div>
+    </div>
+</div>
