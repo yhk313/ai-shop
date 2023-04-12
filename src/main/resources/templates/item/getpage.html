@@ -39,7 +39,7 @@ $(document).ready(function(){
             <th>NAME</th>
             <th>PRICE</th>
             <th>RDATE</th>
-            <th th:if="${session.logincust != null}">CART</th>
+            <th th:if="${session.logincust != null} and ${#session.getAttribute('userRole') == 'user'}">CART</th>
 
         </tr>
         </thead>
@@ -54,7 +54,7 @@ $(document).ready(function(){
             <td th:text="${item.name}"></td>
             <td th:text="${item.price}"></td>
             <td th:text="${#dates.format(item.rdate, 'yyyy-MM-dd')}"></td>
-            <td th:if="${session.logincust != null}" >
+            <td th:if="${session.logincust != null} and ${#session.getAttribute('userRole') == 'user'}">
                 <a th:href="@{/item/addcart(id=${item.id})}" class="btn btn-info" role="button">ADD CART</a>
             </td>
 

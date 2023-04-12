@@ -6,6 +6,7 @@ import com.shop.dto.CustDTO;
 import com.shop.service.CartsService;
 import com.shop.service.CustService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

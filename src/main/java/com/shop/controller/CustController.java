@@ -20,6 +20,7 @@ public class CustController {
     @Autowired
     CustService custService;
     String dir= "/cust/";
+
     @RequestMapping("")
     public String cust(Model model){
         model.addAttribute("left",dir+"left");

@@ -48,17 +48,22 @@ public class MainController {
         return "main";
     }
 
-    @RequestMapping("/loginimpl")// 로그인 됐을 때 loginfail화면, 로그인 안됐을 때 loginok 화면
+    @RequestMapping("/loginimpl")
     public String loginimpl(Model model, HttpSession session, String id, String pwd) {
         CustDTO cust = null;
-        String center = "loginfail";
+        String center = "loginok";
         try {
             cust = custService.get(id);
-            if(cust == null){
+            if (cust == null) {
                 center = "loginfail";
-            }else{
-                if(cust.getPwd().equals(pwd)){
-                    session.setAttribute("logincust",cust);
+            } else {
+                if (cust.getPwd().equals(pwd)) {
+                    session.setAttribute("logincust", cust);
+                    if (cust.getId().equals("admin")) {
+                        session.setAttribute("userRole", "admin");
+                    } else {
+                        session.setAttribute("userRole", "user");
+                    }
                     center = "loginok";
                 }
             }
@@ -66,8 +71,6 @@ public class MainController {
             center = "loginfail";
         }
         model.addAttribute("center", center);
-
-
         return "main";
     }
 

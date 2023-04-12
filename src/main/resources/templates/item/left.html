@@ -1,0 +1,17 @@
+<h1>ITEM</h1>
+
+
+<h3><a th:href="@{/item/getpage}">LIST</a></h3>
+
+
+<!--<div th:if="${session.logincust != null}">-->
+<!--<div th:if="${#session.getAttribute('userRole') == 'user'}">-->
+<!--    <p>로그인한 유저롤이 유저</p>-->
+<!--</div>-->
+<!--</div>-->
+
+<!-- 관리자용 링크 -->
+
+<div th:if="${session.logincust != null} and ${#session.getAttribute('userRole') == 'admin'}">
+    <h3><a th:href="@{/item/add}">ADD</a></h3>
+</div>

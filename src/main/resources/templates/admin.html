@@ -27,7 +27,7 @@ var stompClient = null;
 var id = '[[${session.logincust.id}]]';
 // 서버소켓에 연결
 function connect() {//접속시도
-	var socket = new SockJS('http://10.10.10.172/ws');
+	var socket = new SockJS('http://101.101.219.153/ws');
 	stompClient = Stomp.over(socket);
 
 	stompClient.connect({}, function(frame) {//3가지 connect 받을 준비.

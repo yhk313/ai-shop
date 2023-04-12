@@ -30,7 +30,7 @@ public class OCRUtil {
 
 	
 	public static String getText(String imgname, String imgpath) {
-		 String imageFile = imgpath +"\\"+imgname;
+		 String imageFile = imgpath +imgname;
 		 StringBuffer response = null;
 			try {
 				URL url = new URL(apiURL);
