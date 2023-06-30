@@ -22,7 +22,8 @@ import org.springframework.beans.factory.annotation.Value;
 public class OCRUtil {
 
 	static String apiURL = "https://vgssfojr2u.apigw.ntruss.com/custom/v1/21702/ac6fb7296f0f0f1fcb424af75c6df4c2c981b5a0bd2a8a933e76f9ee5576c82f/infer";
-	static String secretKey = "WWFPU0hpRm5md2hrUHJDQ0FqT2FDTGlQV1JIdUpRaVk=";
+	@Value("${ocr-secret-key}")
+	static String secretKey;
 //	static String imgpath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static","img").toString();
 
 //	static String imgpath;

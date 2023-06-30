@@ -25,6 +25,8 @@ public class CustController {
     public String cust(Model model){
         model.addAttribute("left",dir+"left");
         model.addAttribute("center",dir+"center");
+        String version = org.springframework.core.SpringVersion.getVersion();
+        System.out.println("version : " + version);
         return "main";
     }
     @RequestMapping("/add")

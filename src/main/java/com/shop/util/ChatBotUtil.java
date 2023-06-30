@@ -15,9 +15,11 @@ import javax.crypto.spec.SecretKeySpec;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 
 public class ChatBotUtil {
-	private static String secretKey = "b3NRU2Fjd2RacnNndlJFa0J4T0VtY1B1bXpHZENmTmg=";
+	@Value("${chatBot-secret-key}")
+	private static String secretKey;
 	private static String apiUrl = "https://s33s9x73km.apigw.ntruss.com/custom/v1/10091/ac6fb7296f0f0f1fcb424af75c6df4c2c981b5a0bd2a8a933e76f9ee5576c82f";
 
 	

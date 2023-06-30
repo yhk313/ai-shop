@@ -3,6 +3,7 @@ package com.shop.util;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -11,8 +12,10 @@ import java.net.URLConnection;
 import java.util.Map;
 
 public class CFRCUtil {
-  static String clientId = "62vbe4blkj";//애플리케이션 클라이언트 아이디값";
-  static String clientSecret = "GcaTJPIjSfDQ4bHV0fZuFlIugC3WIS4C7TOZHzF2";//애플리케이션 클라이언트 시크릿값";
+    @Value("${CFR-client-key}")
+    static String clientId;//애플리케이션 클라이언트 아이디값";
+    @Value("${CFR-secret-key}")
+    static String clientSecret;//애플리케이션 클라이언트 시크릿값";
   public  static String getText( String imgpath,String imgname){
     StringBuffer reqStr = new StringBuffer();
     String result = "";

@@ -3,6 +3,7 @@ package com.shop.util;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,8 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WeatherUtil {
-
-  static String skey = "O2%2BFaNjXQLZ9GqP8qpF7r8Y1uDBkeviLiUmQo6rJcaBu9y7d%2FKjeVUvnpDnfEXU%2F9NH7DWdC%2By%2BkHGUmNMUl5Q%3D%3D";
+  @Value("${weather-secret-key}")
+  static String skey;
 
 
   public static String getWeatherInfo(String loc) throws Exception {
