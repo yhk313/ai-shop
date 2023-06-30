@@ -39,7 +39,7 @@ public class CustController {
     @RequestMapping("/addimpl") //cust의  add
     public String addimpl(Model model, CustDTO cust){
         try {
-            custService.register(cust);//left 와 center 영역만 바꿔줌
+            custService.register(cust);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -61,7 +61,7 @@ public class CustController {
         return "main";
     }
 
-    @RequestMapping("/detail")//custlist 화면 출력
+    @RequestMapping("/detail")
     public String detail(Model model, String id){
         CustDTO obj = null;//받을 준비
         try {
@@ -87,19 +87,19 @@ public class CustController {
         return "/main";
     }
 
-    @RequestMapping("/updateimpl") //cust의  add
+    @RequestMapping("/updateimpl")
     public String updateimpl(Model model, CustDTO cust){
         try {
-            custService.modify(cust);//left 와 center 영역만 바꿔줌
+            custService.modify(cust);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return "redirect:/cust/detail?id=" + cust.getId();
     }
-    @RequestMapping("/deleteimpl") //cust의  add
+    @RequestMapping("/deleteimpl")
     public String deleteimpl(Model model, String id){
         try {
-            custService.remove(id);//left 와 center 영역만 바꿔줌
+            custService.remove(id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -33,14 +33,14 @@ public class ItemController {
   }
 
   @RequestMapping("/add")
-  public String add(Model model) { //left 와 center 영역만 바꿔줌
+  public String add(Model model) {
     model.addAttribute("left", dir + "left"); //item의 left html
     model.addAttribute("center", dir + "add");
     return "main";
   }
 
   @RequestMapping("/get")
-  public String get(Model model) { //left 와 center 영역만 바꿔줌
+  public String get(Model model) {
 
     List<ItemDTO> list = null;
     try {

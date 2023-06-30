@@ -27,11 +27,11 @@ public class MapController {
     return "main";
   }
 
-  @RequestMapping("/map2")
-  public String map2(Model model) {
-    model.addAttribute("center","map2");
-    return "main";
-  }
+//  @RequestMapping("/map2")
+//  public String map2(Model model) {
+//    model.addAttribute("center","map2");
+//    return "main";
+//  }
   @RequestMapping("/shopdetail")
   public String shopdetail(Model model, String id) {
     ShopDTO obj = null;//받을 준비
